@@ -48,16 +48,22 @@ console.log(masyvas1);
 
 // Papildoma: a ir b kintamieji apibrežia kvadratą pikseliais. Pagal įvestas reikšmes į input, HTML nubraižomas kvadrato objektas.      
 
-let kvadratas = {
-    a: 3,
-    b: 4,
+document.getElementById("patvirtinti").addEventListener("click", function(){
+let a, b;
+a = parseFloat(document.getElementById("a-krastine").value);
+b = parseFloat(document.getElementById("b-krastine").value)
+});
 
-    plotasPerimetras: function() { // metodas
+let kvadratas = {
+    a: 300,
+    b: 400,
+
+    plotasPerimetras: function() { // metodas - funkcija objekte
         let plotas;
         let perimetras;
 
         plotas = this.a * this.b;
-        perimetras = 2 * this.a + 2 * this.b
+        perimetras = 2 * this.a + 2 * this.b;
         return [plotas, perimetras] // grazina masyva, kuris turi plota ir perimetra
     },
     istrizaine: function() {
@@ -65,10 +71,36 @@ let kvadratas = {
         ilgis = Math.sqrt(this.a * this.a + this.b * this.b);
         return ilgis;
     },
-};
-console.log(kvadratas.plotasPerimetras());
-console.log(kvadratas.istrizaine());
+    nubrezk: function() { // pridetas stilius per metoda, metodas naudoja parametrams duotas reiksmes obkekte
+        let elementas = document.querySelector(".keturkampis");
+        elementas.style.width = this.a + "px";
+        elementas.style.height = this.b + "px";
+    },
+    isvesk: function(){
+     document.getElementById("Kvadrato-perimetras").innerText = "Kvadrato perimetras " + kvadratas.plotasPerimetras()[1]; // masyvo antras elementas // atsakymas isvedamas i html failo elementa su priskirtu id
+     document.getElementById("Kvadrato-plotas").innerText = "Kvadrato plotas " + kvadratas.plotasPerimetras()[0];
+     document.getElementById("Kvadrato-istrizaine").innerText = "Kvadrato istrizaine " + kvadratas.plotasPerimetras()[0]
 
-document.getElementById("Kavdrato-perimetras").innerText = kvadratas.plotasPerimetras()[1]; // masyvo antras elementas
-document.getElementById("Kavdrato-plotas").innerText = kvadratas.plotasPerimetras()[0];
-document.getElementById("Kavdrato-istrizaine").innerText = kvadratas.istrizaine()[0];
+    }
+};
+// console.log(kvadratas.plotasPerimetras());
+// console.log(kvadratas.istrizaine());
+kvadratas.isvesk();
+kvadratas.nubrezk();
+
+// document.getElementById("Kvadrato-perimetras").innerText = "Kvadrato perimetras " + kvadratas.plotasPerimetras()[1]; // masyvo antras elementas // atsakymas isvedamas i html failo elementa su priskirtu id
+// document.getElementById("Kvadrato-plotas").innerText = "Kvadrato plotas " + kvadratas.plotasPerimetras()[0];
+// document.getElementById("Kvadrato-istrizaine").innerText = "Kvadrato istrizaine " + kvadratas.plotasPerimetras()[0];
+
+
+// document.querySelector(".keturkampis").style.width = "400px"; // pridetas stilius html failo divui kurio klase keturkampis
+// document.querySelector(".keturkampis").style.height = "400px"; // pridetas stilius html failo divui kurio klase keturkampis
+// Taip galima uzdeti stiliu per javascrip divui html pagal klase 
+// uzdetas width ir height, color palikta html
+// Stilius, kuris nesikeicia geriau palikti html, o stilius kuris keiciasi galima aprasyti per javascript
+
+/*galima aprasyri ir taip 
+let elementas = document.querySelector(".keturkampis");
+elementas.style.width = "400px";
+elementas.style.height = "400px";
+ */
